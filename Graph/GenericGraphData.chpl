@@ -52,11 +52,63 @@ module GenericGraphData {
 
     proc toDot() {
       for edge in edges {
-        select (edge[0].runtimeType, edge[1].runtimeType) {
-          when (RuntimeType.I, RuntimeType.S) {
-            writeln(edge[0].toValue(int).v,
-                    " --", edge[2], "-> ",
-                    edge[1].toValue(string).v);
+        select (edge[0].runtimeType) {
+          when (RuntimeType.I) {
+            select (edge[1].runtimeType) {
+              when (RuntimeType.I) {
+                writeln(edge[0].toValue(int).v,
+                        " --", edge[2], "-> ",
+                        edge[1].toValue(int).v);
+              }
+              when (RuntimeType.R) {
+                writeln(edge[0].toValue(int).v,
+                        " --", edge[2], "-> ",
+                        edge[1].toValue(real).v);
+              }
+              when (RuntimeType.S) {
+                writeln(edge[0].toValue(int).v,
+                        " --", edge[2], "-> ",
+                        edge[1].toValue(string).v);
+              }
+            }
+          }
+          when (RuntimeType.R) {
+            select (edge[1].runtimeType) {
+              when (RuntimeType.I) {
+                writeln(edge[0].toValue(real).v,
+                        " --", edge[2], "-> ",
+                        edge[1].toValue(int).v);
+              }
+              when (RuntimeType.R) {
+                writeln(edge[0].toValue(real).v,
+                        " --", edge[2], "-> ",
+                        edge[1].toValue(real).v);
+              }
+              when (RuntimeType.S) {
+                writeln(edge[0].toValue(real).v,
+                        " --", edge[2], "-> ",
+                        edge[1].toValue(string).v);
+              }
+            }
+          }
+          when (RuntimeType.S) {
+            select (edge[1].runtimeType) {
+              when (RuntimeType.I) {
+                writeln(edge[0].toValue(string).v,
+                        " --", edge[2], "-> ",
+                        edge[1].toValue(int).v);
+              }
+              when (RuntimeType.R) {
+                writeln(edge[0].toValue(string).v,
+                        " --", edge[2], "-> ",
+                        edge[1].toValue(real).v);
+              }
+              when (RuntimeType.S) {
+                writeln(edge[0].toValue(string).v,
+                        " --", edge[2], "-> ",
+                        edge[1].toValue(string).v);
+              }
+            }
           }
         }
       }
