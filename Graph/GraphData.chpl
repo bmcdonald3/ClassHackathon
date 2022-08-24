@@ -1,6 +1,6 @@
 module GraphData {
   use List;
-  class Graph {
+  class SharedGraph {
     var edges: list((shared GraphNode,
                      shared GraphNode,
                      string));
@@ -17,7 +17,7 @@ module GraphData {
                 edge[1].val);
     }
   }
-
+  
   class GraphNode {
     var val: string;
   }
