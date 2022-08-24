@@ -12,7 +12,9 @@ module GraphData {
 
     proc toDot() {
       for edge in edges do
-        writeln(edge[0].val, " -> ", edge[1].val);
+        writeln(edge[0].val, " --",
+                edge[2], "-> ",
+                edge[1].val);
     }
   }
 
