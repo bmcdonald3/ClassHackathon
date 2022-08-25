@@ -14,8 +14,11 @@
 
 ## General Notes
 
-1. Implicit borrows can make things confusing
-  - if I am trying to use only `owned`, and I am passing an `owned` to a function call, it seems unintuitive that the signature will not work with `owned` memory management on the arguments, given that only `owned` instances exist and I have not explicitly borrowed anything
+Edit: Updated the first note after understanding a bit better
+1. Implicit coercions are confusing
+  - see `ImplicitCoercion.chpl` in this repo for example
+  - when passing around child classes, I am getting some confusing messages that have to do with coercion and it is fixed by using `in` intents, though nothing in the error message indicated that would be helpful
+  - `in` intents are confusing to me and I don't have any idea why it fixed this case, but I've learned that it does
 2. Generic memory management on arguments can result in some unhelpful error messages
   - when the arguments don't have a memory management strategy specified, I would expect all passes of class instances to work on that funciton, but it often doesn't and the error message doesn't help
   - I don't have an exmaple offhand, but this is something that I've struggled with a couple of times
